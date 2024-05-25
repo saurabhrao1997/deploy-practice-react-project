@@ -4,21 +4,58 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(2)
-
+  const [form, setForm] = useState({})
+  console.log("klsalgklk",form)
+const onChange =(e)=>{
+  const {name,value} = e?.target
+  setForm((pre)=> ({...pre,[name]:value}))
+}
+const onsubmit =async(e)=>{
+   e.preventDefault()
+   await fetch("http://localhost:3000/register",{
+    method:"POST",
+    headers:{"content-type":"application/json"},
+    body: JSON.stringify(form)
+   }) 
+}
   return (
     <>
-     
-      <h1>my first react hosting app</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+
+      <form action="" onSubmit={onsubmit} className=''>
+        <span className='text-[24px]'>Registration</span>
+        <div className='w-full flex flex-col my-4 items-end'>
+
     
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+        <div className='flex gap-2 my-2'> 
+          <label>Name</label>
+          <input type="text" name='name' onChange={onChange} />
+        </div>
+        <div className='flex gap-2 my-2'>
+          <label>last name</label>
+          <input type="text" name='lname' onChange={onChange} />
+        </div>
+        <div className='flex gap-2 my-2'> 
+          <label>Age</label>
+          <input type="number" name='age' onChange={onChange} />
+        </div>
+        <div className='flex gap-2 my-2'>
+          <label>Email</label>
+          <input type="text" name='email' onChange={onChange} />
+        </div>
+        <div className='flex gap-2 my-2'>
+          <label>password</label>
+          <input type="text" name='password' onChange={onChange} />
+        </div>
+        <div className='flex gap-2 my-2'> 
+          <label>Confirm Password</label>
+          <input type="text" name='confirmPassword' onChange={onChange} />
+        </div>
+      
+        <button type="submit"> Submit</button>
+        </div>
+      </form>
+   
+    
     </>
   )
 }
