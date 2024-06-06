@@ -8,7 +8,7 @@ function App() {
 
 
 useEffect(async()=>{
-   let response =     await fetch(`${import.meta.env.VITE_BACK_END_API}/getusers`,{
+   let response =     await fetch(`https://deploy-practice-backend.onrender.com/getusers`,{
     method:"GET",
    })
    let allusers = await response.json()
@@ -24,7 +24,7 @@ const onChange =(e)=>{
 }
 const onsubmit =async(e)=>{
    e.preventDefault()
-   await fetch(`${import.meta.env.VITE_BACK_END_API}/register`,{
+   await fetch(`https://deploy-practice-backend.onrender.com/register`,{
     method:"POST",
     headers:{"content-type":"application/json"},
     body: JSON.stringify(form)
