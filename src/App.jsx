@@ -1,9 +1,21 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
+
+
+
+useEffect(async()=>{
+   let response =     await fetch(`${import.meta.env.VITE_BACK_END_API}/getusers`,{
+    method:"GET",
+   })
+   let allusers = await response.json()
+   console.log("allusers",response,allusers)
+},[])
+
+
   const [form, setForm] = useState({})
   console.log("klsalgklk",form)
 const onChange =(e)=>{
@@ -12,7 +24,7 @@ const onChange =(e)=>{
 }
 const onsubmit =async(e)=>{
    e.preventDefault()
-   await fetch("http://localhost:3000/register",{
+   await fetch(`${import.meta.env.VITE_BACK_END_API}/register`,{
     method:"POST",
     headers:{"content-type":"application/json"},
     body: JSON.stringify(form)
